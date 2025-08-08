@@ -343,7 +343,7 @@ class App extends React.Component {
                                 </div>
                             </div>
                             <div className="hero-image">
-                                <img src="./photo.jpg" alt="Marharyta Lykhvar" className="profile-img" />
+                                <img src="./photo.JPG" alt="Marharyta Lykhvar" className="profile-img" />
                             </div>
                         </div>
                     </div>
@@ -529,3 +529,4 @@ class App extends React.Component {
 // Рендерим приложение
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
