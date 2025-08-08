@@ -1,3 +1,5 @@
+emailjs.init("template_ll3oplw");
+
 const translations = {
     en: {
         navHome: "Home",
@@ -21,7 +23,9 @@ const translations = {
         contactEmail: "Your Email",
         contactMessage: "Your Message",
         contactSend: "Send Message",
-        footerText: "© 2025 Margarita Lykhvar. All rights reserved."
+        footerText: "© 2025 Margarita Lykhvar. All rights reserved.",
+        formSuccess: "Message sent! Thank you!",
+        formError: "Error sending message. Please try again."
     },
     de: {
         navHome: "Startseite",
@@ -45,7 +49,9 @@ const translations = {
         contactEmail: "Ihre E-Mail",
         contactMessage: "Ihre Nachricht",
         contactSend: "Nachricht senden",
-        footerText: "© 2025 Margarita Lykhvar. Alle Rechte vorbehalten."
+        footerText: "© 2025 Margarita Lykhvar. Alle Rechte vorbehalten.",
+        formSuccess: "Nachricht gesendet! Danke!",
+        formError: "Fehler beim Senden. Bitte versuchen Sie es erneut."
     },
     ru: {
         navHome: "Главная",
@@ -69,11 +75,142 @@ const translations = {
         contactEmail: "Ваш Email",
         contactMessage: "Ваше сообщение",
         contactSend: "Отправить сообщение",
-        footerText: "© 2025 Маргарита Лихвар. Все права защищены."
+        footerText: "© 2025 Маргарита Лихвар. Все права защищены.",
+        formSuccess: "Сообщение отправлено! Спасибо!",
+        formError: "Ошибка отправки. Пожалуйста, попробуйте снова."
     }
 };
 
 
+class ContactForm extends React.Component {
+    state = {
+        name: '',
+        email: '',
+        message: '',
+        isSending: false,
+        isSent: false,
+        error: null
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.setState({ isSending: true, error: null });
+
+        const templateParams = {
+            from_name: this.state.name,
+            from_email: this.state.email,
+            message: this.state.message
+        };
+
+        
+        emailjs.send(
+            'service_8s7y2g8', // Service ID
+            'template_ll3oplw',  // Template ID
+            templateParams
+        )
+        .then((response) => {
+            console.log('SUCCESS!', response.status, response.text);
+            this.setState({ 
+                isSending: false, 
+                isSent: true,
+                name: '',
+                email: '',
+                message: ''
+            });
+            
+            
+            setTimeout(() => {
+                this.setState({ isSent: false });
+            }, 5000);
+        })
+        .catch((error) => {
+            console.error('FAILED...', error);
+            this.setState({ 
+                isSending: false, 
+                error: this.props.t.formError 
+            });
+        });
+    };
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
+
+    render() {
+        const { language } = this.props;
+        const t = translations[language];
+        const { name, email, message, isSending, isSent, error } = this.state;
+
+        return (
+            <form className="contact-form" onSubmit={this.handleSubmit}>
+                {isSent && (
+                    <div className="alert success">
+                        {t.formSuccess}
+                    </div>
+                )}
+                
+                {error && (
+                    <div className="alert error">{error}</div>
+                )}
+
+                <div className="form-group">
+                    <label htmlFor="name">{t.contactName}</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name"
+                        className="form-control" 
+                        placeholder={t.contactName}
+                        value={name}
+                        onChange={this.handleChange}
+                        required
+                    />
+                </div>
+                
+                <div className="form-group">
+                    <label htmlFor="email">{t.contactEmail}</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email"
+                        className="form-control" 
+                        placeholder={t.contactEmail}
+                        value={email}
+                        onChange={this.handleChange}
+                        required
+                    />
+                </div>
+                
+                <div className="form-group">
+                    <label htmlFor="message">{t.contactMessage}</label>
+                    <textarea 
+                        id="message" 
+                        name="message"
+                        className="form-control" 
+                        placeholder={t.contactMessage}
+                        value={message}
+                        onChange={this.handleChange}
+                        required
+                    ></textarea>
+                </div>
+                
+                <button 
+                    type="submit" 
+                    className="btn btn-primary"
+                    disabled={isSending}
+                >
+                    {isSending ? (
+                        <span>
+                            <i className="fas fa-spinner fa-spin"></i> {t.contactSend}...
+                        </span>
+                    ) : (
+                        t.contactSend
+                    )}
+                </button>
+            </form>
+        );
+    }
+}
 
 
 const projectsData = [
@@ -94,8 +231,6 @@ const projectsData = [
         image: "./project-garden.jpg"
     }
 ];
-
-
 
 
 const educationData = [
@@ -174,7 +309,6 @@ const educationData = [
 ];
 
 
-
 const experienceData = [
     {
         period: "05/2022 - Present",
@@ -228,14 +362,12 @@ const experienceData = [
 ];
 
 
-
 const languagesData = [
     { name: "Russian", level: "Native" },
     { name: "Ukrainian", level: "Native" },
     { name: "German", level: "B2" },
     { name: "English", level: "A2 (Basic with technical vocabulary)" }
 ];
-
 
 
 const skillsData = [
@@ -262,7 +394,6 @@ const skillsData = [
 ];
 
 
-
 const softSkillsData = [
     "Willingness to learn and initiative",
     "User orientation",
@@ -272,13 +403,11 @@ const softSkillsData = [
 ];
 
 
-
 const contactData = {
     tel: "+49 174 684 77 75",
     email: "margorav@gmail.com",
     location: "Berlin, Germany"
 };
-
 
 
 class App extends React.Component {
@@ -490,21 +619,7 @@ class App extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="contact-form">
-                                <div className="form-group">
-                                    <label htmlFor="name">{t.contactName}</label>
-                                    <input type="text" id="name" className="form-control" placeholder={t.contactName} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="email">{t.contactEmail}</label>
-                                    <input type="email" id="email" className="form-control" placeholder={t.contactEmail} />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="message">{t.contactMessage}</label>
-                                    <textarea id="message" className="form-control" placeholder={t.contactMessage}></textarea>
-                                </div>
-                                <button className="btn btn-primary">{t.contactSend}</button>
-                            </div>
+                            <ContactForm language={language} t={t} />
                         </div>
                     </div>
                 </section>
@@ -526,7 +641,6 @@ class App extends React.Component {
     }
 }
 
-// Рендерим приложение
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
