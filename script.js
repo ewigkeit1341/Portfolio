@@ -1,5 +1,5 @@
 //  EmailJS
-emailjs.init("template_ll3oplw");
+emailjs.init("Hl9fnzSJSGH-uSgAX");
 
 const translations = {
     en: {
@@ -103,10 +103,10 @@ class ContactForm extends React.Component {
         };
 
        emailjs.send(
-            'service_8s7y2g8', // Service ID
-            'template_ll3oplw',  // Template ID
-            templateParams
-        )
+            'service_e5deqwo', 
+            'template_ll3oplw', 
+    templateParams
+)
         .then((response) => {
             console.log('SUCCESS!', response.status, response.text);
             this.setState({ 
@@ -634,6 +634,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 
 
