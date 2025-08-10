@@ -1,3 +1,4 @@
+//  EmailJS
 emailjs.init("template_ll3oplw");
 
 const translations = {
@@ -81,7 +82,6 @@ const translations = {
     }
 };
 
-
 class ContactForm extends React.Component {
     state = {
         name: '',
@@ -102,8 +102,7 @@ class ContactForm extends React.Component {
             message: this.state.message
         };
 
-        
-        emailjs.send(
+       emailjs.send(
             'service_8s7y2g8', // Service ID
             'template_ll3oplw',  // Template ID
             templateParams
@@ -232,7 +231,6 @@ const projectsData = [
     }
 ];
 
-
 const educationData = [
     {
         period: "03/2024 – 04/2025",
@@ -308,7 +306,6 @@ const educationData = [
     }
 ];
 
-
 const experienceData = [
     {
         period: "05/2022 - Present",
@@ -361,14 +358,12 @@ const experienceData = [
     }
 ];
 
-
 const languagesData = [
     { name: "Russian", level: "Native" },
     { name: "Ukrainian", level: "Native" },
     { name: "German", level: "B2" },
     { name: "English", level: "A2 (Basic with technical vocabulary)" }
 ];
-
 
 const skillsData = [
     {
@@ -393,7 +388,6 @@ const skillsData = [
     }
 ];
 
-
 const softSkillsData = [
     "Willingness to learn and initiative",
     "User orientation",
@@ -402,13 +396,11 @@ const softSkillsData = [
     "Structured and independent way of working"
 ];
 
-
 const contactData = {
     tel: "+49 174 684 77 75",
     email: "margorav@gmail.com",
     location: "Berlin, Germany"
 };
-
 
 class App extends React.Component {
     state = {
@@ -472,7 +464,7 @@ class App extends React.Component {
                                 </div>
                             </div>
                             <div className="hero-image">
-                                <img src="photo.JPG" alt="Marharyta Lykhvar" className="profile-img" />
+                                <img src="./photo.jpg" alt="Marharyta Lykhvar" className="profile-img" />
                             </div>
                         </div>
                     </div>
@@ -640,7 +632,6 @@ class App extends React.Component {
         );
     }
 }
-
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
