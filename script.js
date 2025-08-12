@@ -7,7 +7,7 @@ const translations = {
         navAbout: "About",
         navProjects: "Projects",
         navContact: "Contact",
-        heroTitle: "Hi, I'm Margarita",
+        heroTitle: "Margarita Lykhvar",
         heroSubtitle: "Frontend Developer & Graphic Designer",
         heroBtnProjects: "View Projects",
         heroBtnContact: "Contact Me",
@@ -33,7 +33,7 @@ const translations = {
         navAbout: "Über Mich",
         navProjects: "Projekte",
         navContact: "Kontakt",
-        heroTitle: "Hallo, ich bin Margarita",
+        heroTitle: "Margarita Lykhvar",
         heroSubtitle: "Frontend Entwicklerin & Grafikdesignerin",
         heroBtnProjects: "Projekte ansehen",
         heroBtnContact: "Kontakt aufnehmen",
@@ -59,7 +59,7 @@ const translations = {
         navAbout: "Обо мне",
         navProjects: "Проекты",
         navContact: "Контакты",
-        heroTitle: "Привет, я Маргарита",
+        heroTitle: "Маргарита Лихвар",
         heroSubtitle: "Фронтенд разработчик и графический дизайнер",
         heroBtnProjects: "Смотреть проекты",
         heroBtnContact: "Связаться со мной",
@@ -634,6 +634,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 
 
