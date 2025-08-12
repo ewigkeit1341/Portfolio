@@ -331,12 +331,12 @@ const experienceData = [
             en: "Delta Medical LTD, Kyiv",
             de: "Delta Medical LTD, Kiew",
             ru: "Delta Medical LTD, Киев"
-        // },
-        // description: {
-        //     en: "Establishment and supervision of an e-learning system with digital tools. Management of digitization projects, including electronic documentation and process optimization. Maintenance of quality guidelines in digital HR systems. Use of graphic design for internal presentations, training materials and the visual corporate presence.",
-        //     de: "Aufbau und Betreuung eines E-Learning-Systems mit digitalen Tools. Leitung von Digitalisierungsprojekten, inklusive elektronischer Dokumentation und Prozessoptimierung. Pflege von Qualitätsrichtlinien in digitalen HR-Systemen. Einsatz von Grafikdesign für interne Präsentationen, Schulungsmaterialien und den visuellen Unternehmensauftritt.",
-        //     ru: "Создание и курирование системы электронного обучения с использованием цифровых инструментов. Руководство проектами по цифровизации, включая электронную документацию и оптимизацию процессов. Поддержание стандартов качества в цифровых HR-системах. Использование графического дизайна для внутренних презентаций, учебных материалов и визуального представления компании."
-        // }
+        },
+        description: {
+            en: "Establishment and supervision of an e-learning system with digital tools. Management of digitization projects, including electronic documentation and process optimization. Maintenance of quality guidelines in digital HR systems. Use of graphic design for internal presentations, training materials and the visual corporate presence.",
+            de: "Aufbau und Betreuung eines E-Learning-Systems mit digitalen Tools. Leitung von Digitalisierungsprojekten, inklusive elektronischer Dokumentation und Prozessoptimierung. Pflege von Qualitätsrichtlinien in digitalen HR-Systemen. Einsatz von Grafikdesign für interne Präsentationen, Schulungsmaterialien und den visuellen Unternehmensauftritt.",
+            ru: "Создание и курирование системы электронного обучения с использованием цифровых инструментов. Руководство проектами по цифровизации, включая электронную документацию и оптимизацию процессов. Поддержание стандартов качества в цифровых HR-системах. Использование графического дизайна для внутренних презентаций, учебных материалов и визуального представления компании."
+        }
     },
     {
         period: "02/2006 – 03/2008",
@@ -349,12 +349,12 @@ const experienceData = [
             en: "Alkiv LTD, Kyiv",
             de: "Alkiv LTD, Kiew",
             ru: "Alkiv LTD, Киев"
-        // },
-        // description: {
-        //     en: "Introduction and management of digital personnel files and documentation processes. Application of structured HR systems for data collection and analysis. Support of internal communication through targeted use of graphic design.",
-        //     de: "Einführung und Verwaltung digitaler Personalakten und Dokumentationsprozesse. Anwendung strukturierter HR-Systeme zur Datenerfassung und -analyse. Unterstützung der internen Kommunikation durch gezielten Einsatz von Grafikdesign.",
-        //     ru: "Внедрение и управление цифровыми кадровыми документами и процессами документооборота. Применение структурированных HR-систем для сбора и анализа данных. Поддержка внутренних коммуникаций с помощью целенаправленного использования графического дизайна."
-        // }
+        },
+        description: {
+            en: "Introduction and management of digital personnel files and documentation processes. Application of structured HR systems for data collection and analysis. Support of internal communication through targeted use of graphic design.",
+            de: "Einführung und Verwaltung digitaler Personalakten und Dokumentationsprozesse. Anwendung strukturierter HR-Systeme zur Datenerfassung und -analyse. Unterstützung der internen Kommunikation durch gezielten Einsatz von Grafikdesign.",
+            ru: "Внедрение и управление цифровыми кадровыми документами и процессами документооборота. Применение структурированных HR-систем для сбора и анализа данных. Поддержка внутренних коммуникаций с помощью целенаправленного использования графического дизайна."
+        }
     }
 ];
 
@@ -634,6 +634,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 
 
