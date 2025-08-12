@@ -1,4 +1,3 @@
-//  EmailJS
 emailjs.init("Hl9fnzSJSGH-uSgAX");
 
 const translations = {
@@ -634,6 +633,7 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 
 
