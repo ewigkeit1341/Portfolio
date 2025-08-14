@@ -8,8 +8,10 @@ const translations = {
         navContact: "Contact",
         heroTitle: "Margarita Lykhvar",
         heroSubtitle: "Frontend Developer & Graphic Designer",
-        heroBtnProjects: "View Projects",
-        heroBtnContact: "Contact Me",
+        heroDescription: "I'm Margarita – making digital products less frustrating and more fascinating. As an ex-HR pro, I know how to simplify processes. As a developer, I do it with style: HTML, CSS, JavaScript & React. Your job: be delighted. My job: make it happen.",
+        heroBtnResume: "CV",
+        heroBtnProjects: "Projects",
+        heroBtnContact: "Contact",
         aboutTitle: "About Me",
         skillsTitle: "Technical Skills",
         languagesTitle: "Languages",
@@ -34,8 +36,10 @@ const translations = {
         navContact: "Kontakt",
         heroTitle: "Margarita Lykhvar",
         heroSubtitle: "Frontend Entwicklerin & Grafikdesignerin",
-        heroBtnProjects: "Projekte ansehen",
-        heroBtnContact: "Kontakt aufnehmen",
+        heroDescription: "Ich bin Margarita – mache digitale Produkte weniger frustrierend und mehr faszinierend. Als Ex-HRlerin weiß ich, wie man Prozesse vereinfacht. Als Entwicklerin tue ich es mit Style: HTML, CSS, JavaScript & React. Ihr Job: begeistert sein. Mein Job: dafür sorgen.",
+        heroBtnResume: "CV",
+        heroBtnProjects: "Projekte",
+        heroBtnContact: "Kontakt",
         aboutTitle: "Über Mich",
         skillsTitle: "Technische Fähigkeiten",
         languagesTitle: "Sprachen",
@@ -60,8 +64,10 @@ const translations = {
         navContact: "Контакты",
         heroTitle: "Маргарита Лихвар",
         heroSubtitle: "Фронтенд разработчик и графический дизайнер",
-        heroBtnProjects: "Смотреть проекты",
-        heroBtnContact: "Связаться со мной",
+        heroDescription: "Я Маргарита – делаю цифровые продукты менее раздражающими и более восхитительными. Как экс-HR, я знаю, как упрощать процессы. Как разработчик, делаю это со стилем: HTML, CSS, JavaScript и React. Ваша работа: восхищаться. Моя работа: этого добиться.",
+        heroBtnResume: "CV",
+        heroBtnProjects: "Проекты",
+        heroBtnContact: "Контакт",
         aboutTitle: "Обо мне",
         skillsTitle: "Технические навыки",
         languagesTitle: "Языки",
@@ -101,33 +107,32 @@ class ContactForm extends React.Component {
             message: this.state.message
         };
 
-       emailjs.send(
-            'service_e5deqwo', 
-            'template_ll3oplw', 
-    templateParams
-)
-        .then((response) => {
-            console.log('SUCCESS!', response.status, response.text);
-            this.setState({ 
-                isSending: false, 
-                isSent: true,
-                name: '',
-                email: '',
-                message: ''
+        emailjs.send(
+            'service_e5deqwo',
+            'template_ll3oplw',
+            templateParams
+        )
+            .then((response) => {
+                console.log('SUCCESS!', response.status, response.text);
+                this.setState({
+                    isSending: false,
+                    isSent: true,
+                    name: '',
+                    email: '',
+                    message: ''
+                });
+
+                setTimeout(() => {
+                    this.setState({ isSent: false });
+                }, 5000);
+            })
+            .catch((error) => {
+                console.error('FAILED...', error);
+                this.setState({
+                    isSending: false,
+                    error: this.props.t.formError
+                });
             });
-            
-            
-            setTimeout(() => {
-                this.setState({ isSent: false });
-            }, 5000);
-        })
-        .catch((error) => {
-            console.error('FAILED...', error);
-            this.setState({ 
-                isSending: false, 
-                error: this.props.t.formError 
-            });
-        });
     };
 
     handleChange = (e) => {
@@ -146,54 +151,54 @@ class ContactForm extends React.Component {
                         {t.formSuccess}
                     </div>
                 )}
-                
+
                 {error && (
                     <div className="alert error">{error}</div>
                 )}
 
                 <div className="form-group">
                     <label htmlFor="name">{t.contactName}</label>
-                    <input 
-                        type="text" 
-                        id="name" 
+                    <input
+                        type="text"
+                        id="name"
                         name="name"
-                        className="form-control" 
+                        className="form-control"
                         placeholder={t.contactName}
                         value={name}
                         onChange={this.handleChange}
                         required
                     />
                 </div>
-                
+
                 <div className="form-group">
                     <label htmlFor="email">{t.contactEmail}</label>
-                    <input 
-                        type="email" 
-                        id="email" 
+                    <input
+                        type="email"
+                        id="email"
                         name="email"
-                        className="form-control" 
+                        className="form-control"
                         placeholder={t.contactEmail}
                         value={email}
                         onChange={this.handleChange}
                         required
                     />
                 </div>
-                
+
                 <div className="form-group">
                     <label htmlFor="message">{t.contactMessage}</label>
-                    <textarea 
-                        id="message" 
+                    <textarea
+                        id="message"
                         name="message"
-                        className="form-control" 
+                        className="form-control"
                         placeholder={t.contactMessage}
                         value={message}
                         onChange={this.handleChange}
                         required
                     ></textarea>
                 </div>
-                
-                <button 
-                    type="submit" 
+
+                <button
+                    type="submit"
                     className="btn btn-primary"
                     disabled={isSending}
                 >
@@ -404,7 +409,8 @@ const contactData = {
 class App extends React.Component {
     state = {
         language: 'de',
-        isLanguageMenuOpen: false
+        isLanguageMenuOpen: false,
+        isMenuOpen: false
     };
 
     changeLanguage = (lang) => {
@@ -417,8 +423,18 @@ class App extends React.Component {
         }));
     };
 
+    toggleMenu = () => {
+        this.setState(prevState => ({
+            isMenuOpen: !prevState.isMenuOpen
+        }));
+    };
+
+    closeMenu = () => {
+        this.setState({ isMenuOpen: false });
+    };
+
     render() {
-        const { language, isLanguageMenuOpen } = this.state;
+        const { language, isLanguageMenuOpen, isMenuOpen } = this.state;
         const t = translations[language];
 
         return (
@@ -428,11 +444,17 @@ class App extends React.Component {
                     <div className="container">
                         <div className="navbar">
                             <a href="#" className="logo">ML</a>
-                            <ul className="nav-links">
-                                <li><a href="#">{t.navHome}</a></li>
-                                <li><a href="#about">{t.navAbout}</a></li>
-                                <li><a href="#projects">{t.navProjects}</a></li>
-                                <li><a href="#contact">{t.navContact}</a></li>
+
+                            {/* Кнопка гамбургер-меню для мобильных */}
+                            <button className="menu-toggle" onClick={this.toggleMenu}>
+                                <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+                            </button>
+
+                            <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
+                                <li><a href="#" onClick={this.closeMenu}>{t.navHome}</a></li>
+                                <li><a href="#about" onClick={this.closeMenu}>{t.navAbout}</a></li>
+                                <li><a href="#projects" onClick={this.closeMenu}>{t.navProjects}</a></li>
+                                <li><a href="#contact" onClick={this.closeMenu}>{t.navContact}</a></li>
                             </ul>
                             <div className="controls">
                                 <div className="language-switcher">
@@ -457,9 +479,18 @@ class App extends React.Component {
                             <div className="hero-text">
                                 <h1 className="hero-title">{t.heroTitle}</h1>
                                 <p className="hero-subtitle">{t.heroSubtitle}</p>
+                                <p className="hero-description">{t.heroDescription}</p>
                                 <div className="hero-buttons">
                                     <a href="#projects" className="btn btn-primary">{t.heroBtnProjects}</a>
                                     <a href="#contact" className="btn btn-outline">{t.heroBtnContact}</a>
+                                    <a
+                                        href="./Lebenslauf_Lykhvar.pdf"
+                                        download="Lebenslauf_Margarita_Lykhvar.pdf"
+                                        className="btn btn-resume"
+                                        aria-label={`${t.heroBtnResume} (PDF)`}
+                                    >
+                                        <i className="fas fa-download"></i> {t.heroBtnResume}
+                                    </a>
                                 </div>
                             </div>
                             <div className="hero-image">
@@ -631,15 +662,4 @@ class App extends React.Component {
         );
     }
 }
-
 ReactDOM.render(<App />, document.getElementById('root'));
-
-
-
-
-
-
-
-
-
-
